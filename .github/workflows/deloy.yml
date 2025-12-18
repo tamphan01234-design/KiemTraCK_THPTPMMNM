@@ -1,0 +1,28 @@
+name: Deploy and Build Process
+
+on:
+  push:
+    branches: [ "main", "master" ] # Chạy khi bạn thực hiện lệnh push code
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v3
+
+      - name: Setup PHP Environment
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '5.6' # Theo yêu cầu Bài 2 trên bảng
+
+      - name: Check Source Code (Build)
+        run: |
+          echo "Bắt đầu quá trình build..."
+          php -l index.php # Kiểm tra lỗi cú pháp file index.php
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./ # Đẩy toàn bộ code hiện tại lên trang web
