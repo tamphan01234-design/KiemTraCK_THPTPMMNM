@@ -1,0 +1,29 @@
+version: '3'
+
+services:
+  # Cài đặt PHP 5.6 kết hợp Apache (Port 8088)
+  web:
+    image: php:5.6-apache
+    container_name: php56_apache
+    ports:
+      - "8088:80"
+    volumes:
+      - ./:/var/www/html
+    networks:
+      - app-network
+
+  # Cài đặt MySQL 5 (Port 3310)
+  db:
+    image: mysql:5.7
+    container_name: mysql5_db
+    environment:
+      MYSQL_ROOT_PASSWORD: "" # Theo code trên bảng là pass trống
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+    ports:
+      - "3310:3306"
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
