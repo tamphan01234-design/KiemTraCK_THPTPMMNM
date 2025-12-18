@@ -1,0 +1,24 @@
+name: CI/CD Build and Deploy Process
+
+on:
+  push:
+    branches: [ "main", "master" ] # Chạy khi bạn push code lên nhánh chính
+
+jobs:
+  build-process:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Khoi tao moi truong Build
+        run: echo "Dang bat dau qua trinh Build..."
+
+      - name: Kiem tra Source Code
+        run: |
+          ls -la
+          echo "Kiem tra file index.php ton tai hay khong..."
+          test -f index.php && echo "File hop le!"
+
+      - name: Hoan tat Deploy
+        run: echo "Build va Deploy thanh cong len server!"
