@@ -1,0 +1,14 @@
+name: Deploy and Build Process
+on:
+  push:
+    branches: [ "main", "master" ] # Chạy khi bạn thực hiện lệnh push
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Kiem tra source code
+        run: |
+          echo "Dang kiem tra file..."
+          ls -la
+          test -f index.php && echo "Da thay file index.php"
